@@ -315,7 +315,7 @@ long long getInversions(long long *arr, int n){
     return mergeSort(arr, 0, n-1);
 }
 
-Q12. Merge sort.
+Q11. Merge sort.
 Solution -> 
 
 void merge(int arr[], int l, int m, int r)
@@ -358,7 +358,7 @@ void merge(int arr[], int l, int m, int r)
         merge(arr, l, mid, r);
     }
 
-Q13. Find the element in an 2D matrix.
+Q12. Find the element in an 2D matrix.
 Solution -> 
 bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int lo = 0;
@@ -377,7 +377,7 @@ bool searchMatrix(vector<vector<int>>& matrix, int target) {
         return false;     
     }
 
-Q14. Calculate pow(n) -> o(logn) time complexity.
+Q13. Calculate pow(n) -> o(logn) time complexity.
 solution -> 
 double myPow(double x, int n) {
         double ans = 1.0;
@@ -394,4 +394,31 @@ double myPow(double x, int n) {
         }
         if(n < 0) ans = (double)(1.0) / (double)(ans);
         return ans;
+    }
+
+Q14. Find majority element -> Moore's voting algorithm.
+Solution -> 
+int majorityElement(vector<int>& nums) {
+        int cnt = 0;
+        int el;
+        for(int i=0;i<nums.size();i++){
+            if(cnt == 0){
+                cnt = 1;
+                el = nums[i];
+            }else if(nums[i] == el){
+                cnt++;
+            }else{
+                cnt--;
+            }
+        }
+        int cnt1 = 0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i] == el){
+                cnt1++;
+            }
+        }
+        if(cnt1 > nums.size()/2){
+            return el;
+        }
+        return -1;
     }
