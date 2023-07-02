@@ -266,3 +266,51 @@ public:
         return maxi;
     }
 };
+
+Q10. Count inversions in an array.
+Inversion is defined as traverse array from left to right and then compare its elements from i = 0 and j = n-1 such that arr[i] > arr[j].
+
+#include <bits/stdc++.h> 
+long long merge(long long *arr, long long low, long long mid, long long high){
+    vector<int> temp;
+    int left = low;
+    int right = mid + 1;
+    int count = 0;
+    while(left <= mid && right <= high){
+        if(arr[left] <= arr[right]){
+            temp.push_back(arr[left]);
+            left++;
+        }else{
+            temp.push_back(arr[right]);
+            count = count+ (mid-left+1);
+            right++;
+        }
+    }
+    while(left <= mid){
+        temp.push_back(arr[left]);
+        left++;
+    }
+    while(right <= high){
+        temp.push_back(arr[right]);
+        right++;
+    }
+    for(int i=low; i<= high; i++){
+        arr[i] = temp[i-low];
+    }
+    return count;
+}
+
+long long mergeSort(long long *arr, long long low, long long high){
+    long long count = 0;
+    if(low >= high) return count;
+    long long mid = (low+high)/2;
+    count = count + mergeSort(arr, low, mid);
+    count = count + mergeSort(arr, mid+1, high);
+    count = count + merge(arr, low, mid, high);
+    return count;
+}
+
+long long getInversions(long long *arr, int n){
+    // Write your code here.
+    return mergeSort(arr, 0, n-1);
+}
