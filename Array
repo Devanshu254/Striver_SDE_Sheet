@@ -512,3 +512,19 @@ vector<int> majorityElement(vector<int>& nums) {
         if(cnt2 >= mini) ls.push_back(el2);
         return ls;
     }
+
+Q17. Two sum.
+Solution -> 
+vector<int> twoSum(vector<int>& nums, int target) {
+        map<int, int> mpp;
+        int n = nums.size();
+        for(int i=0;i<n;i++){
+            int num = nums[i];
+            int moreNeeded = target - num;
+            if(mpp.find(moreNeeded) != mpp.end()){
+                return {mpp[moreNeeded], i};
+            }
+            mpp.insert({num, i});
+        }
+        return {-1,-1};
+    }
