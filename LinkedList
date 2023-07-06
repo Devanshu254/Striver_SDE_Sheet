@@ -14,3 +14,25 @@ public:
         return prev;
     }
 };
+
+Q2. Find middle of linked list.
+Solution -> 
+ListNode* middleNode(ListNode* head) {
+        ListNode* curr = head;
+        int count = 0;
+        while(curr != NULL){
+            curr = curr->next;
+            count++;
+        }
+        curr = head;
+        int middle = 0;
+        if(count %2==0){
+            middle = count/2;
+        }else{
+            middle = count/2;
+        }
+        for(int i=0;i<middle;i++){
+            curr = curr->next;
+        }
+        return curr;
+    }
