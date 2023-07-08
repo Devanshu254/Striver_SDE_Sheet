@@ -167,3 +167,35 @@ public:
         return false;
     }
 };
+
+Q9. Reverse Nodes in group of k elements.
+Solution -> 
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode* curr = head;
+        int count = 0;
+        while(curr != NULL && count < k){
+            curr = curr->next;
+            count++;
+        }
+        if(count == k){
+            curr = head;
+            ListNode* prev = NULL;
+            ListNode* next = NULL;
+            int count = 0;
+            while(curr != NULL && count < k){
+                next = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = next;
+                count++;
+            }
+            if(next != NULL){
+                ListNode* rest = reverseKGroup(next, k);
+                head->next = rest;
+            }
+            return prev;
+        }else return head;
+    }
+};
