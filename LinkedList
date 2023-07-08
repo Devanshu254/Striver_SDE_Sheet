@@ -199,3 +199,39 @@ public:
         }else return head;
     }
 };
+
+Q10. Check whether the linked list is palindrom or not.
+Solution -> 
+class Solution {
+    ListNode* reverseList(ListNode* head){
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        while(curr != NULL){
+            ListNode* next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+public:
+    bool isPalindrome(ListNode* head) {
+        if(head == NULL) return true;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast->next != NULL && fast->next->next != NULL){
+            slow = slow -> next;
+            fast = fast -> next -> next;
+        }
+        ListNode* rev = reverseList(slow->next);
+        ListNode* curr = head;
+        while(rev != NULL){
+            if(rev->val != curr->val){
+                return false;
+            }
+            rev = rev->next;
+            curr = curr->next;
+        }
+        return true;
+    }
+};
