@@ -35,4 +35,29 @@ class Solution
         v.push_back(jobProfit);
         return v;
     } 
+
+Q2. Minimum number of plateform required.
+Solution ->
+int findPlatform(int arr[], int dep[], int n)
+    {
+    	// Your code here
+    	sort(arr, arr+n);
+    	sort(dep, dep+n);
+    	int i = 1, j = 0;
+    	int plateform = 1, result = 1;
+    	while(i<n && j<n) {
+    	    if(arr[i] <= dep[j]) {
+    	        plateform++;
+    	        i++;
+    	    }
+    	    else if(arr[i] > dep[j]) {
+    	        plateform--;
+    	        j++;
+    	    }
+    	    if(plateform > result) {
+    	        result = plateform;
+    	    }
+    	}
+    	return result;
+    }
 };
