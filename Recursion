@@ -1,0 +1,19 @@
+Q1. SubsetSum 1.
+Solution -> 
+void func(int ind, int sum, vector<int>& arr, int N, vector<int>& SubsetSum) {
+        if(ind == N) {
+            SubsetSum.push_back(sum);
+            return;
+        }
+        func(ind+1, sum + arr[ind], arr, N, SubsetSum);
+        func(ind+1, sum, arr, N, SubsetSum);
+    }
+public:
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        // Write Your Code here
+        vector<int> SubsetSum;
+        func(0, 0 , arr, N, SubsetSum);
+        sort(SubsetSum.begin(), SubsetSum.end());
+        return SubsetSum;
+    }
